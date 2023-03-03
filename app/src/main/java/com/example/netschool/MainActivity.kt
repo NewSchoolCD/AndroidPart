@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         if (destination.id==R.id.navigation_login){
             navView.visibility= View.GONE
         }
+        else{
+            navView.visibility = View.VISIBLE
+        }
     }
 
     override fun onResume() {
