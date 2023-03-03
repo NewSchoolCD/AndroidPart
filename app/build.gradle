@@ -55,7 +55,6 @@ dependencies {
 
     //Third-part libraries
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
 
 
 }

@@ -14,35 +14,59 @@
         <!-- Customize your theme here. -->
     </style>
 
-<!--    <style name="ThemeToolBar" parent="Widget.AppCompat.Toolbar">-->
-<!--        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
-<!--        <item name="android:background">?colorOnPrimary</item>-->
-<!--        <item name="android:textColor">?colorOnSecondary</item>-->
-<!--        <item name="android:theme">@style/Base_ToolbarTheme</item>-->
-<!--        <item name="titleTextAppearance">@style/CustomTitleTextAppearance</item>-->
-<!--        <item name="subtitleTextAppearance">@style/CustomSubTitleTextAppearance</item>-->
-<!--    </style>-->
+
+    <!--designs login_bkogin and register-->
+    <style name="parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="loginParent" parent="parent">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColorHint">@color/purple_200</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="colorControlNormal">@color/purple_500</item>
+        <item name="colorControlActivated">@color/purple_200</item>
+        <item name="colorControlHighlight">@color/purple_500</item>
+    </style>
+
+    <style name="headerText" parent="parent">
+        <item name="android:textSize">@dimen/headerTextSize</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="loginHeader">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">@dimen/headerTextSize</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="loginCard" parent="parent"></style>
+
+    <style name="linearParent" parent="parent">
+        <item name="android:orientation">vertical</item>
+    </style>
 
 
-<!--    <style name="Base_ToolbarTheme">-->
-<!--        &lt;!&ndash; Color used for the title of the Toolbar - as long as not overridden &ndash;&gt;-->
-<!--        <item name="android:textColorPrimary">@color/purple_700</item>-->
-<!--        &lt;!&ndash; Used to color back button and three dots &ndash;&gt;-->
-<!--        <item name="android:textColorSecondary">@color/purple_500</item>-->
-<!--    </style>-->
 
-<!--    <style name="CustomTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
-<!--        <item name="android:textSize">16sp</item>-->
-<!--        <item name="android:textColor">@color/purple_700</item>-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--    </style>-->
+    <style name="modifiedEditText" parent="parent">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:backgroundTint">@color/transparent</item>
+    </style>
 
+    <style name="viewParent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
-<!--    <style name="CustomSubTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">-->
-<!--        <item name="android:textSize">14sp</item>-->
-<!--        <item name="android:textColor">@color/purple_500</item>-->
-<!--        <item name="android:textStyle">italic</item>-->
-<!--    </style>-->
-
+    <style name="loginButton" parent="viewParent">
+        <item name="android:background">@drawable/login_button_bk</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>
