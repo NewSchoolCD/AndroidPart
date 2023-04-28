@@ -6,12 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-
-    <com.applikeysolutions.cosmocalendar.view.CalendarView
+    <com.alamkanak.weekview.WeekView
+        android:id="@+id/weekView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:selectionType="single"
-        app:orientation="horizontal"/>
+        android:layout_height="match_parent"
+        app:defaultEventColor="@color/design_default_color_primary"
+        app:eventTextColor="@color/transparent"
+        app:timeColumnTextSize="12sp"
+        app:hourHeight="60dp"
+        app:timeColumnPadding="8dp"
+        app:timeColumnTextColor="@color/black"
+        app:timeColumnBackgroundColor="@color/transparent"
+        app:headerPadding="12dp"
+        app:columnGap="8dp"
+        app:numberOfVisibleDays="7"
+        app:headerBackgroundColor="@color/transparent"
+        app:dayBackgroundColor="@color/transparent"
+        app:todayBackgroundColor="@color/transparent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
