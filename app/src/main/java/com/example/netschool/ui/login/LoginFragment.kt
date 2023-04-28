@@ -41,11 +41,10 @@ class LoginFragment : Fragment() {
         val root: View = binding.root
         auth = FirebaseAuth.getInstance()
 
-//        TODO("Удалить")
-        val randomButton = binding.simpleButton
+        val randomButton = binding.loginBtn
         randomButton.setOnClickListener {
-            var email: String = "roman.kradyk@gmail.com"
-            var password: String = "261002"
+            val email: String = binding.editLoginUser.text.toString()
+            val password: String = binding.editLoginPass.text.toString()
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_LONG).show()
             } else{
@@ -60,9 +59,6 @@ class LoginFragment : Fragment() {
                 })
             }
         }
-//        val textView: TextView = binding.textSettings
-//        textView.text = "Hello"
-
         return root
     }
 

@@ -4,19 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.netschool.R
 import com.example.netschool.auth.LoginViewModel
 import com.example.netschool.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
 
+class DashboardFragment : Fragment(){
     private var _binding: FragmentDashboardBinding? = null
     private val viewModel by viewModels<LoginViewModel>()
 
@@ -36,6 +33,8 @@ class DashboardFragment : Fragment() {
 //        val textView: TextView = binding.textDashboard
         return root
     }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeAuthenticationState()
@@ -46,17 +45,7 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
     private fun observeAuthenticationState() {
-        viewModel.authenticationState.observe(viewLifecycleOwner, Observer { authenticationState ->
-            when (authenticationState) {
-                LoginViewModel.AuthenticationState.AUTHENTICATED -> {
 
-
-                } else -> {
-
-                    findNavController().navigate(R.id.navigation_login)
-
-            }
-            }
-        })
     }
+
 }
