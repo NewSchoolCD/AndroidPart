@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.NetSchool" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NetSchool" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,7 +10,8 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -39,7 +40,6 @@
     </style>
 
     <style name="loginHeader">
-        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/headerTextSize</item>
         <item name="android:textStyle">bold</item>
 
@@ -61,12 +61,6 @@
     <style name="viewParent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="loginButton" parent="viewParent">
-        <item name="android:background">@drawable/login_button_bk</item>
-        <item name="android:textColor">@color/whiteTextColor</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
