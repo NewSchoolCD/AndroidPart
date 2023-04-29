@@ -2,25 +2,31 @@ package com.example.netschool.auth
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.example.netschool.model.Status
 import com.example.netschool.repositories.FBRepository
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel (
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val repository: FBRepository,
 
     ) :ViewModel() {
-    private val fbUser = MutableLiveData<FirebaseUser?>()
-    private val vkEmail = MutableLiveData<String?>()
-    val currentUser get() = fbUser
-    val vkAuthEmail get() = vkEmail
+    private val _fbUser = MutableLiveData<FirebaseUser?>()
+    private val _userStatus:MutableLiveData<Status<FirebaseUser>> = MutableLiveData()
+    val currentUser get() = _fbUser
+    val currentStatus get() = _userStatus
 
 
-    fun signInUser(email: String, password: String) = viewModelScope.launch {
+    fun trySignInUser(email: String, password: String) = viewModelScope.launch {
         when {
             email.isEmpty() -> {
 //                eventsChannel.send(AllEvents.ErrorCode(1))
@@ -31,25 +37,26 @@ class LoginViewModel (
             }
 
             else -> {
-                actualSignInUser(email, password)
+                _userStatus.postValue(Status.Loading())
+                signInUser(email, password)
             }
         }
     }
 
-    private fun actualSignInUser(email: String, password: String) = viewModelScope.launch {
+    private fun signInUser(email: String, password: String) = viewModelScope.launch {
         try {
             val user = repository.signInUser(email, password)
             user?.let {
-                fbUser.postValue(it)
+                _fbUser.postValue(it)
+                _userStatus.postValue(Status.Success(_fbUser.value!!))
 
 //                eventsChannel.send(AllEvents.Message("login success"))
             }
         } catch (e: Exception) {
-
+            currentStatus.postValue(Status.Failure(e))
             val error = e.toString().split(":").toTypedArray()
             Log.d("SignIn", "signInUser: ${error[1]}")
             Log.d("typeSignIn", "TypeException: ${e::class}")
-//            eventsChannel.send(AllEvents.Error(error[1]))
         }
     }
     fun verifySendPasswordReset(email: String) {
@@ -80,7 +87,7 @@ class LoginViewModel (
 
     fun getUser() = viewModelScope.launch {
         val user = repository.getUser()
-        fbUser.postValue(user)
+        _fbUser.postValue(user)
     }
 
 }

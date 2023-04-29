@@ -10,7 +10,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.netschool.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-        if (destination.id==R.id.navigation_login){
+        if (destination.id==R.id.navigation_login|| destination.id == R.id.navigation_register){
             navView.visibility= View.GONE
         }
         else{

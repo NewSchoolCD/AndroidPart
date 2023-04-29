@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -14,18 +15,27 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.netschool.R
+import com.example.netschool.adapters.FBTools
 import com.example.netschool.auth.LoginViewModel
 import com.example.netschool.databinding.FragmentSettingsBinding
+import com.example.netschool.repositories.FBRepository
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.makeramen.roundedimageview.RoundedImageView
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
-
+    lateinit var logOut:Button
     private var _binding: FragmentSettingsBinding? = null
-    private val viewModel by viewModels<LoginViewModel>()
-    private lateinit var auth: FirebaseAuth
+    private val viewModel:SettingsViewModel by viewModels()
     private lateinit var accountPic:RoundedImageView
     private lateinit var startForProfileImageResult:ActivityResultLauncher<Intent>
 
@@ -42,7 +52,6 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         accountPic = binding.roundedImageView
-        auth = FirebaseAuth.getInstance()
 
 
         startForProfileImageResult =
@@ -70,7 +79,15 @@ class SettingsFragment : Fragment() {
                     }
                 }
             }
-
+        logOut = binding.logOut
+        var job: Job? = null
+        logOut.setOnClickListener {
+            job?.cancel()
+            job = MainScope().launch {
+                viewModel.logout()
+                findNavController().navigate(R.id.action_navigation_settings_to_navigation_login)
+            }
+        }
         observeAuthenticationState()
 //        val textView: TextView = binding.textSettings
 //        textView.text = "Hello"

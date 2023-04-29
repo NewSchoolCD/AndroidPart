@@ -27,12 +27,20 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.netschool.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_login"
         android:name="com.example.netschool.ui.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_navigation_login_to_registerFragment"
+            app:destination="@id/navigation_register" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_splash"
@@ -46,4 +54,15 @@
             android:id="@+id/action_splashFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.example.netschool.ui.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
+
+
 </navigation>

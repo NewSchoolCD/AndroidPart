@@ -40,7 +40,6 @@
     </style>
 
     <style name="loginHeader">
-        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/headerTextSize</item>
         <item name="android:textStyle">bold</item>
 

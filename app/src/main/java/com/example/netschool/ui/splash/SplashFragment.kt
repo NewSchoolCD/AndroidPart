@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.netschool.R
-import com.example.netschool.adapters.FBTools
 import com.example.netschool.databinding.FragmentSplashBinding
-import com.example.netschool.repositories.FBRepository
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
-    lateinit var viewModel: SplashViewModel
+    private val viewModel: SplashViewModel by viewModels()
 
     private val binding get() = _binding!!
 
@@ -34,10 +33,6 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = FBRepository(FBTools())
-        val viewModelProviderFactory = SplashViewModelProviderFactory(repository)
-        viewModel =
-            ViewModelProvider(this, viewModelProviderFactory).get(SplashViewModel::class.java)
         registerObservers()
         getUser()
     }

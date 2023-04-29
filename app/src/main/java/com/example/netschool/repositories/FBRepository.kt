@@ -5,9 +5,10 @@ import com.example.netschool.adapters.FBTools
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
+import javax.inject.Inject
 
 
-class FBRepository(val fbTools: FBTools) {
+class FBRepository @Inject constructor(val fbTools: FBTools) {
 
     suspend fun signUpUser(email: String, password: String): FirebaseUser? {
         return fbTools.signUpUser(email, password)
@@ -17,12 +18,9 @@ class FBRepository(val fbTools: FBTools) {
         return fbTools.signInUser(email, password)
     }
 
-    suspend fun signInWithGoogle(credential: AuthCredential) : FirebaseUser? {
-        return fbTools.signInWithGoogle(credential)
-    }
 
 
-    fun signOut():FirebaseUser?{
+    suspend fun signOut():FirebaseUser?{
         return fbTools.signOut()
     }
 
