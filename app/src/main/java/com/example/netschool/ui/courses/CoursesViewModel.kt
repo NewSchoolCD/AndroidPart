@@ -1,4 +1,4 @@
-package com.example.netschool.ui.home
+package com.example.netschool.ui.courses
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(): ViewModel() {
+class CoursesViewModel @Inject constructor(): ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is your home Fragment"
+        value = "This is your courses Fragment"
     }
     val text: LiveData<String> = _text
 }

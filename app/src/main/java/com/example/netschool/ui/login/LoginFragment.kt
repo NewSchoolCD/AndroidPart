@@ -1,21 +1,19 @@
 package com.example.netschool.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.example.netschool.R
-import com.example.netschool.auth.LoginViewModel
+import com.example.netschool.auth.AuthViewModel
 import com.example.netschool.databinding.FragmentLoginBinding
 import com.example.netschool.model.Status
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.util.TextUtils
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -26,7 +24,7 @@ class LoginFragment : Fragment() {
 
 
     private var _binding: FragmentLoginBinding? = null
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<AuthViewModel>()
     private lateinit var auth: FirebaseAuth
 
 
@@ -68,12 +66,16 @@ class LoginFragment : Fragment() {
         viewModel.currentStatus.observe(viewLifecycleOwner) {
             when (it) {
                 is Status.Loading ->{
-
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Status.Success ->{
-
+                    binding.progressBar.visibility = View.GONE
+                    findNavController().navigate(R.id.action_navigation_login_to_navigation_dashboard)
                 }
                 is Status.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(context, it.exception.localizedMessage, Toast.LENGTH_SHORT).show()
+                    Log.d("LoginError", it.exception.message.toString())
 
                 }
 

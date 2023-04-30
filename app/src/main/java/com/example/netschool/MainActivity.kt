@@ -35,11 +35,19 @@ class MainActivity : AppCompatActivity() {
 
     }
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-        if (destination.id==R.id.navigation_login|| destination.id == R.id.navigation_register){
-            navView.visibility= View.GONE
-        }
-        else{
-            navView.visibility = View.VISIBLE
+        when (destination.id){
+            R.id.navigation_login ->{
+
+                navView.visibility= View.GONE
+
+            }
+            R.id.navigation_register ->{
+                navView.visibility= View.GONE
+            }
+            else ->{
+                navView.visibility = View.VISIBLE
+
+            }
         }
     }
 

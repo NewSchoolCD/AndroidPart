@@ -2,7 +2,6 @@ package com.example.netschool.ui.settings
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,18 +13,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.netschool.R
-import com.example.netschool.adapters.FBTools
-import com.example.netschool.auth.LoginViewModel
 import com.example.netschool.databinding.FragmentSettingsBinding
-import com.example.netschool.repositories.FBRepository
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.auth.FirebaseAuth
 import com.makeramen.roundedimageview.RoundedImageView
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -115,7 +107,7 @@ class SettingsFragment : Fragment() {
 
     private fun observeAuthenticationState() {
 //        viewModel.authenticationState.observe(viewLifecycleOwner, Observer { authenticationState ->
-//            if (authenticationState == LoginViewModel.AuthenticationState.AUTHENTICATED) {
+//            if (authenticationState == AuthViewModel.AuthenticationState.AUTHENTICATED) {
 //
 //                accountPic.setOnClickListener {
 //                    createImagePicker(startForProfileImageResult)

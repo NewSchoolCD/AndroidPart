@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.example.netschool.R
-import com.example.netschool.auth.LoginViewModel
+import com.example.netschool.auth.AuthViewModel
 import com.example.netschool.databinding.FragmentDashboardBinding
 
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DashboardFragment : Fragment(){
     private var _binding: FragmentDashboardBinding? = null
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<AuthViewModel>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.

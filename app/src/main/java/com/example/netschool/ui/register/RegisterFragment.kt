@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.netschool.R
-import com.example.netschool.auth.LoginViewModel
-import com.example.netschool.databinding.FragmentLoginBinding
+import com.example.netschool.auth.AuthViewModel
 import com.example.netschool.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +22,7 @@ class RegisterFragment : Fragment() {
     }
 
     private var _binding: FragmentRegisterBinding? = null
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<AuthViewModel>()
     private lateinit var auth: FirebaseAuth
 
 
