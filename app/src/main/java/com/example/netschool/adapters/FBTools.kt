@@ -1,10 +1,11 @@
 package com.example.netschool.adapters
 
+import com.example.netschool.interfaces.FB
+import com.example.netschool.model.Subject
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.netschool.interfaces.FB
 import kotlinx.coroutines.tasks.await
 
 class FBTools : FB {
@@ -37,9 +38,17 @@ class FBTools : FB {
         return firebaseAuth.currentUser
     }
 
-    override suspend fun getCources() = firestore.collection("subject")
+    override suspend fun getCources(): List<String> {
+        val snapshot = firestore.collection("subject").get().await()
+        return snapshot.documents.map { it.toObject(Subject::class.java)!!.label }
+    }
 
-    override fun saveResource(email: String, map:HashMap<String,Double>) = firestore.collection("users_data").document(email).set(map)
+    override suspend fun getGrades(course:String):List<String>{
+        val snapshot = firestore.collection("subject").whereEqualTo("label", course).get().await()
+        return snapshot.documents[0].toObject(Subject::class.java)!!.grades
+    }
+
+
 
     override fun getUser(): FirebaseUser? {
         return firebaseAuth.currentUser

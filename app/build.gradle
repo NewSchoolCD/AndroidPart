@@ -70,5 +70,7 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.github.thellmund.Android-Week-View:core:5.3.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+
 
 }

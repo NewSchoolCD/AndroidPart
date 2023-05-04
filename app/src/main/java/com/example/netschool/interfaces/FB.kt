@@ -1,9 +1,7 @@
 package com.example.netschool.interfaces
 
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.CollectionReference
 
 interface FB {
     suspend fun signUpUser(email: String, password: String):FirebaseUser?
@@ -12,9 +10,10 @@ interface FB {
 
     suspend fun signInWithGoogle(credential: AuthCredential):FirebaseUser?
 
-    suspend fun getCources():CollectionReference
+    suspend fun getCources(): List<String>
 
-    fun saveResource(email: String, map:HashMap<String,Double>): Task<Void>
+    suspend fun getGrades(course:String):List<String>
+
     fun signOut():FirebaseUser?
 
     fun getUser():FirebaseUser?

@@ -29,9 +29,12 @@
                 android:hint="Subject">
 
                 <AutoCompleteTextView
+                    android:id="@+id/subjectinput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:saveEnabled="false"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,9 +50,11 @@
                 android:hint="Grate">
 
                 <AutoCompleteTextView
+                    android:id="@+id/classinput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:enabled="false"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,6 +62,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cources"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
