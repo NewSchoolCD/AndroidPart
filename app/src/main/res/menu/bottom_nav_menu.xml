@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Расписание" />
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_courses"
         android:icon="@drawable/contact"
         android:title="Курсы" />
 
@@ -18,5 +18,9 @@
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="Настройки" />
+    <item
+        android:id="@+id/menu_none"
+        android:title=""
+        android:visible="false"/>
 
 </menu>

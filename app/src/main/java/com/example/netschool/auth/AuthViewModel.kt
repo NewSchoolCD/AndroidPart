@@ -1,22 +1,18 @@
 package com.example.netschool.auth
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.netschool.model.Status
 import com.example.netschool.repositories.FBRepository
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class AuthViewModel @Inject constructor(
     private val repository: FBRepository,
 
     ) :ViewModel() {
@@ -48,14 +44,14 @@ class LoginViewModel @Inject constructor(
             val user = repository.signInUser(email, password)
             user?.let {
                 _fbUser.postValue(it)
-                _userStatus.postValue(Status.Success(_fbUser.value!!))
+                _userStatus.postValue(Status.Success(it))
 
 //                eventsChannel.send(AllEvents.Message("login success"))
             }
         } catch (e: Exception) {
             currentStatus.postValue(Status.Failure(e))
             val error = e.toString().split(":").toTypedArray()
-            Log.d("SignIn", "signInUser: ${error[1]}")
+            Log.d("SignIn", "signInUser: ${error[0]}")
             Log.d("typeSignIn", "TypeException: ${e::class}")
         }
     }

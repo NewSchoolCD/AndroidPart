@@ -19,7 +19,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
-        style="@style/loginParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -30,7 +29,6 @@
 
         <EditText
             android:id="@+id/editTextText"
-            style="@style/loginParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -40,7 +38,7 @@
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
-        style="@style/loginParent"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -52,7 +50,7 @@
 
         <EditText
             android:id="@+id/editTextText1"
-            style="@style/loginParent"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -63,7 +61,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
-        style="@style/loginParent"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -73,7 +71,7 @@
 
         <EditText
             android:id="@+id/editTextText2"
-            style="@style/loginParent"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,7 +82,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
-        style="@style/loginParent"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -95,7 +93,7 @@
 
         <EditText
             android:id="@+id/editTextText3"
-            style="@style/loginParent"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -117,7 +115,6 @@
 
     <TextView
         android:id="@+id/textView8"
-        style="@style/parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
