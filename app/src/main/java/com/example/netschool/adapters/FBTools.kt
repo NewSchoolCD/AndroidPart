@@ -37,6 +37,8 @@ class FBTools : FB {
         return firebaseAuth.currentUser
     }
 
+    override suspend fun getCources() = firestore.collection("subject")
+
     override fun saveResource(email: String, map:HashMap<String,Double>) = firestore.collection("users_data").document(email).set(map)
 
     override fun getUser(): FirebaseUser? {
