@@ -1,11 +1,7 @@
 package com.example.netschool.repositories
 
-import androidx.activity.ComponentActivity
 import com.example.netschool.adapters.FBTools
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.CollectionReference
 import javax.inject.Inject
 
 
@@ -19,8 +15,12 @@ class FBRepository @Inject constructor(val fbTools: FBTools) {
         return fbTools.signInUser(email, password)
     }
 
-    suspend fun getCourses(): CollectionReference {
+    suspend fun getCourses(): List<String> {
         return fbTools.getCources()
+    }
+
+    suspend fun getGrades(subject: String):List<String>{
+        return fbTools.getGrades(subject)
     }
 
     suspend fun signOut():FirebaseUser?{
@@ -36,7 +36,4 @@ class FBRepository @Inject constructor(val fbTools: FBTools) {
         return true
     }
 
-    fun saveResource(email: String, map:HashMap<String,Double>): Task<Void> {
-        return fbTools.saveResource(email,map)
-    }
 }
