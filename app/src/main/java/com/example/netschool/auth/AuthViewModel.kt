@@ -39,6 +39,28 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun trySignUp(name: String, email: String, password: String, comfirm:String) = viewModelScope.launch {
+        when {
+            name.isEmpty() -> {
+//                eventsChannel.send(AllEvents.ErrorCode(1))
+            }
+            email.isEmpty() -> {
+//                eventsChannel.send(AllEvents.ErrorCode(1))
+            }
+
+            password.isEmpty() -> {
+//                eventsChannel.send(AllEvents.ErrorCode(2))
+            }
+            comfirm.isEmpty() -> {
+//                eventsChannel.send(AllEvents.ErrorCode(2))
+            }
+            else -> {
+                _userStatus.postValue(Status.Loading())
+                signUp(email, password)
+            }
+        }
+    }
+
     private fun signInUser(email: String, password: String) = viewModelScope.launch {
         try {
             val user = repository.signInUser(email, password)
@@ -55,6 +77,24 @@ class AuthViewModel @Inject constructor(
             Log.d("typeSignIn", "TypeException: ${e::class}")
         }
     }
+
+    private fun signUp(email: String, password: String) = viewModelScope.launch {
+        try {
+            val user = repository.signUpUser(email, password)
+            user?.let {
+                _fbUser.postValue(it)
+                _userStatus.postValue(Status.Success(it))
+
+//                eventsChannel.send(AllEvents.Message("login success"))
+            }
+        } catch (e: Exception) {
+            currentStatus.postValue(Status.Failure(e))
+            val error = e.toString().split(":").toTypedArray()
+            Log.d("SignIn", "signInUser: ${error[0]}")
+            Log.d("typeSignIn", "TypeException: ${e::class}")
+        }
+    }
+
     fun verifySendPasswordReset(email: String) {
         if (email.isEmpty()) {
             viewModelScope.launch {
