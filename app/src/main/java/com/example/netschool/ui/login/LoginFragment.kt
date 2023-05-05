@@ -25,7 +25,6 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val viewModel by viewModels<AuthViewModel>()
-    private lateinit var auth: FirebaseAuth
 
 
 
@@ -40,7 +39,6 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        auth = FirebaseAuth.getInstance()
 
         val randomButton = binding.loginBtn
         var job: Job? = null
