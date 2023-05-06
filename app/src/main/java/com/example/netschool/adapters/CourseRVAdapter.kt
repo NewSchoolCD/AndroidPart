@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.netschool.databinding.CardTutorBinding
-import com.example.netschool.model.Subject
+import com.example.netschool.model.Tutor
 
 class CourseRVAdapter() : RecyclerView.Adapter<CourseRVAdapter.CourseViewHolder>() {
 
@@ -15,11 +15,11 @@ class CourseRVAdapter() : RecyclerView.Adapter<CourseRVAdapter.CourseViewHolder>
         RecyclerView.ViewHolder(binding.root)
 
 
-    val diffCallback = object : DiffUtil.ItemCallback<Subject>() {
-        override fun areItemsTheSame(oldItem: Subject, newItem: Subject) =
-            oldItem.label == newItem.label
+    val diffCallback = object : DiffUtil.ItemCallback<Tutor>() {
+        override fun areItemsTheSame(oldItem: Tutor, newItem: Tutor) =
+            oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Subject, newItem: Subject) =
+        override fun areContentsTheSame(oldItem: Tutor, newItem: Tutor) =
             oldItem == newItem
     }
 
@@ -39,7 +39,7 @@ class CourseRVAdapter() : RecyclerView.Adapter<CourseRVAdapter.CourseViewHolder>
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         val tutorCard = diffList.currentList[position]
         holder.binding.apply {
-
+            textView7.text = "${tutorCard.first_name} ${tutorCard.last_name}"
         }
     }
 

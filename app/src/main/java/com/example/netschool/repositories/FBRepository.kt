@@ -1,6 +1,7 @@
 package com.example.netschool.repositories
 
 import com.example.netschool.adapters.FBTools
+import com.example.netschool.model.Tutor
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
@@ -21,6 +22,17 @@ class FBRepository @Inject constructor(val fbTools: FBTools) {
 
     suspend fun getGrades(subject: String):List<String>{
         return fbTools.getGrades(subject)
+    }
+
+    suspend fun getTutor():List<Tutor>{
+        return fbTools.getTutor()
+    }
+
+    suspend fun getTutor(course:String):List<Tutor>{
+        return fbTools.getTutor(course)
+    }
+    suspend fun getTutor(course:String, grade:Int):List<Tutor>{
+        return fbTools.getTutor(course, grade)
     }
 
     suspend fun signOut():FirebaseUser?{

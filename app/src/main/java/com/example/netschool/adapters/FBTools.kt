@@ -2,6 +2,7 @@ package com.example.netschool.adapters
 
 import com.example.netschool.interfaces.FB
 import com.example.netschool.model.Subject
+import com.example.netschool.model.Tutor
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -45,7 +46,25 @@ class FBTools : FB {
 
     override suspend fun getGrades(course:String):List<String>{
         val snapshot = firestore.collection("subject").whereEqualTo("label", course).get().await()
-        return snapshot.documents[0].toObject(Subject::class.java)!!.grades
+        return snapshot.documents[0].toObject(Subject::class.java)!!.grades.sorted().map { it.toString() }
+    }
+
+    override suspend fun getTutor():List<Tutor>{
+        val snapshot = firestore.collection("teachers").get().await()
+        return snapshot.documents.map { it.toObject(Tutor::class.java)!! }
+    }
+
+    override suspend fun getTutor(course: String):List<Tutor>{
+        val snapshot = firestore.collection("teachers").whereArrayContainsAny("Cources.${course}",
+            listOf(7,9,11)
+        ).get().await()
+        return snapshot.documents.map { it.toObject(Tutor::class.java)!! }
+    }
+    override suspend fun getTutor(course: String, grade:Int):List<Tutor>{
+        val snapshot = firestore.collection("teachers").whereArrayContainsAny("Cources.${course}",
+            listOf(grade)
+        ).get().await()
+        return snapshot.documents.map { it.toObject(Tutor::class.java)!! }
     }
 
 
@@ -57,6 +76,9 @@ class FBTools : FB {
     override suspend fun sendForgotPassword(email: String) {
         firebaseAuth.sendPasswordResetEmail(email).await()
     }
+
+
+
 
 
 }

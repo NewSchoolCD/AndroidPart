@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.netschool.adapters.CourseRVAdapter
 import com.example.netschool.databinding.FragmentCoursesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -25,6 +27,9 @@ class CoursesFragment : Fragment() {
 
     private lateinit var subjectAdapter:ArrayAdapter<String>
     private lateinit var gradeAdapter:ArrayAdapter<String>
+
+    lateinit var recyclerView:RecyclerView
+    lateinit var rvAdapter:CourseRVAdapter
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -46,6 +51,7 @@ class CoursesFragment : Fragment() {
 
         MainScope().launch {
             viewModel.getCourses()
+            viewModel.getTutor()
         }
 
         viewModel.apply {
@@ -56,7 +62,7 @@ class CoursesFragment : Fragment() {
                 grade.addAll(it)
             }
         }
-
+        setupRecyclerView()
         provideObversers()
 
         subjectAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.layout.select_dialog_item_material, subject)
@@ -67,9 +73,14 @@ class CoursesFragment : Fragment() {
             onItemClickListener =  AdapterView.OnItemClickListener { adapterView, view, i, l ->
                 job = null
                 job = MainScope().launch {
-                    viewModel.getGrades(adapterView.getItemAtPosition(i).toString())
+                    adapterView.getItemAtPosition(i).toString().apply {
+                        viewModel.getGrades(this)
+                        viewModel.getTutor(this)
+                    }
                 }
                 binding.classinput.isEnabled = true
+                binding.classinput.clearListSelection()
+                binding.classinput.setText("", false)
             }
         }
 
@@ -78,10 +89,9 @@ class CoursesFragment : Fragment() {
             var job:Job? = null
             onItemClickListener =  AdapterView.OnItemClickListener { adapterView, view, i, l ->
                 job = null
-//                job = MainScope().launch {
-//                    viewModel.getGrades(adapterView.getItemAtPosition(i).toString())
-//                }
-                Toast.makeText(context, "GRGRG", Toast.LENGTH_SHORT).show()
+                job = MainScope().launch {
+                    viewModel.getTutor(binding.subjectinput.text.toString(), adapterView.getItemAtPosition(i).toString().toInt())
+                }
             }
         }
 
@@ -93,10 +103,16 @@ class CoursesFragment : Fragment() {
     }
 
     fun setupRecyclerView(){
+        recyclerView = binding.rvCources
+        rvAdapter = CourseRVAdapter()
+        recyclerView.apply {
+            adapter = rvAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
 
     }
 
-    fun provideObversers(){
+    private fun provideObversers(){
         viewModel.subjects.observe(viewLifecycleOwner) {
             subject.clear()
             subject.addAll(it)
@@ -106,6 +122,10 @@ class CoursesFragment : Fragment() {
             grade.clear()
             grade.addAll(it)
             gradeAdapter.notifyDataSetChanged()
+
+        }
+        viewModel.tutors.observe(viewLifecycleOwner){
+            rvAdapter.diffList.submitList(it)
         }
     }
 }
